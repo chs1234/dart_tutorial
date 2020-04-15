@@ -1,4 +1,3 @@
-A simple command-line application.
+##무작정 올리는 Dart tutorial 기본 예제소스코드입니다
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+###data type
