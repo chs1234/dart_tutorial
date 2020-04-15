@@ -1,15 +1,10 @@
-//[Arrow Syntax]
+//[import]
+
+import 'calculator.dart';
 
 void main() {
-  List ages = [10, 11, 21];
-  //var filteredAges = ages.where((age) => age > 10);
-  //print(filteredAges); // expected: (11, 21)
+  int result = add(1, 2);
+  int result2 = multiply(2, 5);
 
-  ages.where((age) => age > 10).forEach(print);
-  // expected: 11, 21
-
-  var flyByObjects = ['yourturn', 'hello', 'abc'];
-  flyByObjects.where((name) => name.contains('turn')).forEach(print);
-  // expected: 'yourturn'
-
+  print('더하기 결과값: $result, 곱하기 결과값: $result2');
 }
