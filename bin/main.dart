@@ -1,3 +1,5 @@
+// [Inheritance]
+
 class Spacecraft {
   String name;
   DateTime launchDate;
@@ -5,7 +7,6 @@ class Spacecraft {
   // Constructor, with syntactic sugar for assignment to members.
   Spacecraft(this.name, this.launchDate) {
     // Initialization code goes here.
-    name = name + "님";
   }
 
   // Named constructor that forwards to the default one.
@@ -13,7 +14,6 @@ class Spacecraft {
 
   int get launchYear =>
       launchDate?.year; // read-only non-final property
-      // ?. => null이 아닌 경우에만 반환함. null인 경우 반환하지 않는다.
 
   // Method.
   void describe() {
@@ -29,13 +29,26 @@ class Spacecraft {
   }
 }
 
-void main() {
-  Spacecraft spacecraft = Spacecraft("나로호", DateTime.now());
-  //print(spacecraft); //Instance of 'Spacecraft'
-  //print("이름: ${spacecraft.name}, 발사일: ${spacecraft.launchDate}");
-  
-  //spacecraft.launchYear = 30; // 값 설정 불가, int "get"
-  print(spacecraft.launchYear);
+class Orbiter extends Spacecraft {
+  num altitude; //num은 int, double의 부모클래스, 모두 수용가능
+  Orbiter(String name, DateTime launchDate, this.altitude)
+      : super(name, launchDate); //부모의 생성자 호출
 
-  spacecraft.describe();
+  @override
+  void describe() {
+    print("자식의 정보!!!");
+    super.describe();
+    print("부모의 describe()를 재정의함! altitude: $altitude");
+  }
+}
+
+void main() {
+  // Orbiter orbiter = Orbiter('나로호', DateTime.now(), 100);
+  // orbiter.describe(); // 부모클래스(SpaceCraft)의 메소드 사용가능
+
+  Spacecraft spacecraft = Orbiter('나로호', DateTime.now(), 100);
+  spacecraft.describe(); // 부모는 자식의 타입을 받을 수 있다. 재정의한 자식의 메소드가 호출됨.
+
+  // 자식은 부모의 타입을 받을 수 없다.
+  // Orbiter orbiter = Spacecraft("나로호", DateTime.now());
 }
