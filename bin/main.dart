@@ -1,4 +1,4 @@
-// [Inheritance]
+// [Mixins]
 
 class Spacecraft {
   String name;
@@ -42,12 +42,29 @@ class Orbiter extends Spacecraft {
   }
 }
 
+class Piloted {
+  int astronauts = 1;
+  // **Mixins로 정의된 클래스는 생성자를 만들 수 없다.
+  //Piloted() {}
+  void describeCrew() {
+    print('Number of astronauts: $astronauts');
+  }
+}
+
+class PilotedCraft extends Spacecraft with Piloted {
+  PilotedCraft(String name, DateTime launchDate) : super(name, launchDate);
+}
+
 void main() {
+  PilotedCraft pilotedCraft = PilotedCraft('홍길동', DateTime.now());
+  pilotedCraft.describe();
+  pilotedCraft.describeCrew();
+
   // Orbiter orbiter = Orbiter('나로호', DateTime.now(), 100);
   // orbiter.describe(); // 부모클래스(SpaceCraft)의 메소드 사용가능
 
-  Spacecraft spacecraft = Orbiter('나로호', DateTime.now(), 100);
-  spacecraft.describe(); // 부모는 자식의 타입을 받을 수 있다. 재정의한 자식의 메소드가 호출됨.
+  // Spacecraft spacecraft = Orbiter('나로호', DateTime.now(), 100);
+  // spacecraft.describe(); // 부모는 자식의 타입을 받을 수 있다. 재정의한 자식의 메소드가 호출됨.
 
   // 자식은 부모의 타입을 받을 수 없다.
   // Orbiter orbiter = Spacecraft("나로호", DateTime.now());
