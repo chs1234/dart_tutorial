@@ -55,17 +55,66 @@ class PilotedCraft extends Spacecraft with Piloted {
   PilotedCraft(String name, DateTime launchDate) : super(name, launchDate);
 }
 
+class MockSpaceship implements Spacecraft {
+  @override
+  DateTime launchDate;
+
+  @override
+  String name;
+
+  // 생성자 추가
+  MockSpaceship(this.launchDate, this.name);
+
+  @override
+  void describe() {
+    // TODO: implement describe
+  }
+
+  @override
+  // TODO: implement launchYear
+  int get launchYear => null;
+
+}
+
+abstract class Describable {
+  void describe();
+
+  void describeWithEmphasis() {
+    print('=========');
+    describe();
+    print('=========');
+  }
+}
+
+class Unit extends Describable {
+  @override
+  void describe() {
+    print('unit Class override');
+  }
+}
+
+class Animal implements Describable {
+  @override
+  void describe() {
+    print("describe()");
+  }
+
+  @override
+  void describeWithEmphasis() {
+    print("describeWithEmphasis()");
+  }
+
+}
+
 void main() {
-  PilotedCraft pilotedCraft = PilotedCraft('홍길동', DateTime.now());
-  pilotedCraft.describe();
-  pilotedCraft.describeCrew();
+    // MockSpaceship mockSpaceship = MockSpaceship(DateTime.now(), "나로호");
+    // print(mockSpaceship.name); //null
 
-  // Orbiter orbiter = Orbiter('나로호', DateTime.now(), 100);
-  // orbiter.describe(); // 부모클래스(SpaceCraft)의 메소드 사용가능
+    // Unit unit = Unit();
+    // unit.describe();
+    // unit.describeWithEmphasis();
 
-  // Spacecraft spacecraft = Orbiter('나로호', DateTime.now(), 100);
-  // spacecraft.describe(); // 부모는 자식의 타입을 받을 수 있다. 재정의한 자식의 메소드가 호출됨.
-
-  // 자식은 부모의 타입을 받을 수 없다.
-  // Orbiter orbiter = Spacecraft("나로호", DateTime.now());
+    Animal animal = Animal();
+    animal.describe();
+    animal.describeWithEmphasis();
 }
